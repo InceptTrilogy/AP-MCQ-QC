@@ -6,7 +6,7 @@ import concurrent.futures
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Optional, List, Dict
 
-app = FastAPI(title="AP US MCQ QC")
+app = FastAPI(title="AP QC API")
 
 # Add CORS middleware
 app.add_middleware(
@@ -20,163 +20,6 @@ app.add_middleware(
 # Constants
 ABSOLUTES="""all, always, never, solely, sole, immediate, immediately, irrelevant, complete, completely, every, none, no significant impact, always, identical, unchanging, exclusively,  purely, uniform, universal"""
 PATTERN_PHRASES="""no significant impact, no significant impact, minimal impact, impact was limited, effects were limited, universal, perfectly equal,largely irrelevant, passive victims"""
-
-GOODQS = """
-Question 1: Which of the following did the Mongol armies fail to conquer, and why?
-
-
-Central Asia, because of the effective diplomacy of Timur and his successors
-
-Explanation:
-This answer is incorrect because the Mongols did conquer Central Asia. The effective diplomacy of Timur (Tamerlane) came much later, after the initial Mongol conquests under Genghis Khan and his successors had already established control over the region.
-
-
-Kievan Russia, because the Mongols were unable to endure the harsh Russian winters
-
-Explanation:
-This answer is incorrect because the Mongols did successfully conquer Kievan Russia. Despite the harsh winters, the Mongols were able to adapt to the climate and use their superior military tactics to overcome the Russian principalities.
-
-
-The ‘Abbasid Caliphate, because the defenders flooded the Mesopotamian plains and made them impassable for the Mongol cavalry
-
-Explanation:
-This answer is incorrect because the Mongols did conquer the ‘Abbasid Caliphate. In 1258, they captured Baghdad, marking the end of the Caliphate. The defenders did not flood the plains to stop the Mongols; instead, the Mongols used their military prowess to defeat the ‘Abbasid forces.
-
-
-The Southern Song Empire, because of its superior resources from earlier industrial and commercial revolutions
-
-Explanation:
-This answer is incorrect because the Mongols did conquer the Southern Song Empire. Despite the Southern Song's resources and advancements, the Mongols eventually overcame them in 1279, leading to the establishment of the Yuan Dynasty in China.
-Question 2: The breakup of the Mongol Empire into separate khanates during the mid-thirteenth century was most connected to which of the following developments?
-
-
-Rebellions in China overthrew Mongol rule there and led to the reestablishment of Han Chinese rule under the Ming dynasty.
-
-Explanation:
-While it is true that rebellions in China eventually led to the fall of the Yuan dynasty and the rise of the Ming dynasty, this event occurred in the 14th century and was not the primary cause of the breakup of the Mongol Empire into separate khanates during the mid-13th century.
-
-
-The spread of the bubonic plague following the expansion of trade along the Silk Roads weakened the Mongol Empire demographically and militarily.
-
-Explanation:
-While the bubonic plague did spread along trade routes and had a significant impact on various parts of the world, it was not the primary reason for the breakup of the Mongol Empire into separate khanates. The fragmentation of the empire occurred before the major outbreaks of the plague in the 14th century.
-
-
-Mongol traditions emphasized tribal and personal loyalties and made it difficult to establish long-lasting centralized dynastic rule, which led to civil war.
-
-(Correct)
-Explanation:
-The Mongol Empire, while initially unified under Genghis Khan, was fundamentally built on a system of tribal and personal loyalties. After the death of Genghis Khan, his successors struggled to maintain centralized control, leading to internal conflicts and the eventual division of the empire into separate khanates. This fragmentation was rooted in the inherent difficulties of unifying diverse tribes and maintaining centralized authority over a vast territory.
-
-
-The attempts of Mongol rulers to force their subjects to convert to Islam led to widespread rebellions in Central and East Asia.
-
-Explanation:
-Mongol rulers were generally known for their religious tolerance and did not force their subjects to convert to Islam. This option is historically inaccurate as it does not align with the Mongol Empire's policies or the reasons for its fragmentation.
-
-Question 3:
-
-A historian researching the effects of the Crusades on the diffusion of technology would probably find which of the following sources most useful?
-
-
-European crusaders’ accounts of Islamic religious practices
-
-Explanation:
-While European crusaders' accounts of Islamic religious practices might provide some context on cultural interactions, they are not directly related to the diffusion of technology. These accounts would mainly focus on religious and cultural observations rather than technological exchanges.
-
-
-Birth records from villages along the routes used by the Crusaders
-
-Explanation:
-Birth records from villages along the routes used by the Crusaders would not provide much insight into the diffusion of technology. These records are more likely to offer demographic information rather than details about technological exchanges or advancements.
-
-
-Monks’ translations of Arabic mathematics texts brought from conquered territories
-
-(Correct)
-Explanation:
-Monks' translations of Arabic mathematics texts brought from conquered territories would be highly relevant to understanding the diffusion of technology. These texts represent a direct transfer of knowledge and technological advancements from the Islamic world to Europe, facilitated by the Crusades. The translations would show how European scholars adopted and adapted Arabic mathematical and scientific knowledge.
-
-
-Muslim accounts of European royal marriages
-
-Explanation:
-Muslim accounts of European royal marriages would primarily deal with political alliances and social structures rather than technological diffusion. These records are unlikely to provide detailed information about the transfer of technology between cultures during the Crusades.
-
-Question 9:
-
-
-Historians who argue that there was substantial global integration by the end of the thirteenth century would most likely cite which of the following as evidence to support their claims?
-
-
-The widening and deepening of exchange networks linking Afro-Eurasia after the Mongol conquests
-
-(Correct)
-Explanation:
-The Mongol conquests in the 13th century played a crucial role in creating substantial global integration by connecting vast regions of Afro-Eurasia. The Pax Mongolica, or Mongol Peace, facilitated trade, cultural exchange, and the movement of people and goods across the Silk Roads, linking Europe, the Middle East, Central Asia, and East Asia. This period saw increased interactions and exchanges that contributed to a more interconnected world.
-
-
-The political unification of large territories under imperial rule in the Mediterranean and East Asia
-
-Explanation:
-While the political unification of large territories under imperial rule, such as the Byzantine Empire in the Mediterranean and various dynasties in East Asia, did facilitate regional integration, it did not by itself create substantial global integration by the end of the thirteenth century. These empires were significant, but their influence was largely regional rather than global.
-
-
-The spread of global capitalism from Europe to Africa and Southeast Asia
-
-Explanation:
-The spread of global capitalism from Europe to Africa and Southeast Asia occurred much later, primarily in the 16th century and beyond, as part of the Age of Exploration and the rise of European colonial empires. This development is not relevant to the thirteenth century and thus does not support the argument for substantial global integration by that time.
-
-
-The creation of a new Atlantic trade system based on plantation economies in the Caribbean and the Americas
-
-Explanation:
-The creation of the Atlantic trade system based on plantation economies in the Caribbean and the Americas began in the late 15th century and expanded in the 16th and 17th centuries. This development is not relevant to the thirteenth century and therefore does not support the argument for substantial global integration by that time.
-"""
-
-BADQS = """
-HISTORY BAD Qs {
-          "question": "In what way did Neo-Confucianism emerge as a response to Buddhism during the Song Dynasty? \nA It completely rejected all Buddhist teachings and practices.\nB It integrated some Buddhist concepts while reinforcing Confucian values, creating a syncretic philosophy. \nC It promoted atheism as a new belief system among scholars. \nD It led to widespread persecution of Buddhist monks and temples throughout China.",
-          "pass": false,
-          "reason": "Absolute statements using words like all, every, never, completely, entirely, complete, are not plausible distractors."
-        }
-{
-          "question": "Which of the following factors contributed most significantly to the agricultural productivity of Song China?\nA The adoption of crop rotation methods from Europe \n B The introduction of Champa rice from Vietnam (correct) \nC The use of chemical fertilizers developed in India \nD The implementation of large-scale irrigation systems from Mesopotamia",
-          "pass": false,
-          "reason": "The distractor option C too obviously false because it is a technology from a time period more than 600 years apart from the song dynasty"
-        }
- {
-          "question": "The role of women in Song Dynasty society was characterized by:        \nA) Complete equality with men in all aspects of public and private life. \nB) Increased economic opportunities alongside persistent social restrictions. \nC) Exclusion from all forms of education and literary pursuits. \nD) Mandatory participation in the civil service examination system.",
-          "pass": false,
-          "reason": "Distractors contain absolute statements such as all, complete, completely, never"
-        }
-        {
-          "question": "The impact of Neo-Confucianism on Song Dynasty society can be best described as:\nA) A return to pure, unadulterated early Confucian thought without any new interpretations. \nB) A complete rejection of Confucian principles in favor of Buddhist and Daoist philosophies.\nC) A reinterpretation of Confucian ideas that reinforced social hierarchy and moral cultivation. \nD) An emphasis on individual spiritual enlightenment at the expense of social responsibilities.",
-          "pass": false,
-          "reason": "Distractors are obvious due to words such as all, complete, completely, never"
-        }
-  {
-          "question": "In what way did the Song Dynasty's approach to commerce differ from previous dynasties, and what was a significant economic consequence of this approach?\n\nA By imposing strict trade restrictions, it minimized foreign influence and reduced economic growth.\nB By promoting maritime trade and technological innovations, it led to the commercialization of the economy.(correct) \nC By focusing solely on land-based trade routes like the Silk Road, it neglected naval advancements.\nD By adopting a barter system over currency, it simplified transactions but limited economic complexity.\n",
-          "pass": false,
-          "reason": "Neither the correct response nor any of the distractors respond to both parts of the question. The question asks for the difference from previous dynasties as well as the economic consequence. meaning there is no correct repsonse available"
-        }
-
-{
-          "question": "What primarily facilitated diverse economic exchanges between different Indigenous groups before European colonization?        \nA CORRECT: Established trade networks based on regional resource specializations\nB A universally accepted system of coinage used across tribes \nCContracts enforced through a centralized legal authority \nD Digital communication platforms facilitating long.distance barter deals\n",
-          "pass": false,
-          "reason": "Distractor not a believable lie because it is wildly out of time period suggesting digital networks between 1200 & 1400"
-        }
-        {
-          "question": "How did environmental factors most likely affect political structures in native societies before European arrival?\nA Varied climates led to different subsistence strategies that influenced social hierarchy and governance. \nB Frequent volcanic eruptions prompted a unified pan.Native American political coalition.\nC Widespread desertification drove the creation of continent.wide democratic assemblies. \nD Seasonal monsoons standardized government forms across all native societies on the continent.\n",
-          "pass": false,
-          "reason": "Distractors not plausible because students would not believe these lies. They are too silly."
-        }
- {
-          "question": "How did the differing views on land use between Europeans and Native Americans reflect their broader worldviews during the early interactions in North America?\n\nA Both Europeans and Native Americans believed land should be respected and not exploited for economic gain.\nB Both Europeans and Native Americans believed land was meant to be owned individually and used for personal gain.\nC The Europeans viewed land as a commodity for ownership, while Native Americans saw it as a shared resource. \nD Both Europeans and Native Americans believed land should be owned privately and used for farming.\n",
-          "pass": false,
-          "reason": "Neither the correct response nor any of the distractors connect the concepts in the question. The question asks for an explanation of how views on land use reflect broader world views. All response options address only views on land use meaning there is no correct repsonse available"
-        }
-"""
 
 JSON_RESPONSE_SCHEMA = """{
         "score": 0 or 1,
@@ -295,6 +138,8 @@ class QuestionData(BaseModel):
     explanations: str
     ek_description: str
     lo_description: str
+    goodqs: str
+    badqs: str
 
 def call_claude_api(prompt: str) -> Optional[str]:
     payload = {
@@ -422,11 +267,11 @@ def generate_prompts(data: QuestionData) -> List[str]:
     Bloom Moderate  #### {BLOOM_MODERATE} ####
     Bloom Difficult  #### {BLOOM_DIFFICULT} ####
 
-    +The question type is “reading comprehension” and has  difficulty of 0 if all of the information required to respond is stated explicitly in the text.
-    +The question type is “recall” and the difficulty is 1 if the task in the question is related to BLOOM_EASY
-    +The question type is “analyze” and the difficulty is 2 if the task in the question is related to BLOOM_MODERATE
-    +The question type is “evaluate” and the difficulty is 3 if the task in question is related to BLOOM_DIFFICULT
-    +The task type is “apply” and the difficulty is 3 if the question presents new information or a new situation and the student must apply information from the ARTICLE to a new situation.
+    +The question type is "reading comprehension" and has  difficulty of 0 if all of the information required to respond is stated explicitly in the text.
+    +The question type is "recall" and the difficulty is 1 if the task in the question is related to BLOOM_EASY
+    +The question type is "analyze" and the difficulty is 2 if the task in the question is related to BLOOM_MODERATE
+    +The question type is "evaluate" and the difficulty is 3 if the task in question is related to BLOOM_DIFFICULT
+    +The task type is "apply" and the difficulty is 3 if the question presents new information or a new situation and the student must apply information from the ARTICLE to a new situation.
 
     +Now determine whether the difficulty is appropriate for AP learning materials. If the difficulty is 0, assign a score of 0. If the difficulty is greater than 0, assign a score of 1.
 
@@ -459,7 +304,7 @@ def generate_prompts(data: QuestionData) -> List[str]:
 
     Question to evaluate and the responses:  #### {data.question}+{data.responses} ####
     TaskVerb Definition:  #### {blooms_difficulty} ####
-    Multishot for reference:  #### {GOODQS} {BADQS} ####
+    Multishot for reference:  #### {data.goodqs} {data.badqs} ####
 
     A distractor is a little lie that a teacher might tell to trick a high school student who came to class, but did not read the book or study before the exam.
     Distractors should be related to the topic, and general vocabulary, of the subject, but not too difficult that a first time learner would struggle if they read the chapter well.
@@ -502,7 +347,7 @@ def generate_prompts(data: QuestionData) -> List[str]:
 
     Question to evaluate and the correct response:  #### {data.question}+{data.responses} ####
     TaskVerb Definition  #### {blooms_difficulty} ####
-    Multishot for reference:  #### {GOODQS} {BADQS} ####
+    Multishot for reference:  #### {data.goodqs} {data.badqs} ####
 
     Scoring:
     Assign a score of 1 if all of the following conditions are met:
@@ -525,7 +370,7 @@ def generate_prompts(data: QuestionData) -> List[str]:
     Question to evaluate and the correct response:  #### {data.question}+{data.responses} ####
     Explanations to evaluate: #### {data.explanations}
     TaskVerb Definition:  #### {blooms_difficulty} ####
-    Multishot for reference:  #### {GOODQS} {BADQS} ####
+    Multishot for reference:  #### {data.goodqs} {data.badqs} ####
 
     Scoring:
     Assign a score of 1 if all of the following conditions are met:
